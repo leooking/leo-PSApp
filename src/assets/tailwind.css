@@ -1,0 +1,42 @@
+@tailwind base;
+
+/* Use the components layer for any more complicated classes you want to add to your 
+  project that you’d still like to be able to override with utility classes. */
+@tailwind components;
+
+@tailwind utilities;
+
+/* @layer directive tells Tailwind which “bucket” certain custom styles belong to */
+@layer base {
+  h1 {
+    @apply text-3xl;
+    @apply font-bold;
+    @apply text-psci;
+  }
+  h2 {
+    @apply text-2xl;
+    @apply font-bold;
+    @apply text-psci;
+  }
+  h3 {
+    @apply text-xl;
+    @apply font-bold;
+    @apply text-psci;
+  }
+  h4 {
+    @apply text-lg;
+    @apply font-bold;
+    @apply text-psci;
+  }
+  ul {
+    @apply list-disc;
+    @apply ml-8;
+  }
+  ol {
+    @apply list-decimal;
+    @apply ml-8;
+  }
+}
+
+@layer components {
+}

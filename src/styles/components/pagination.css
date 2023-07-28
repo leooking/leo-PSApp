@@ -1,0 +1,20 @@
+.pagination-container {
+    @apply flex gap-10;
+  }
+
+  .paginate-buttons {
+    @apply h-10 w-10 rounded-full cursor-pointer bg-white border border-gray-300 text-black;
+  }
+
+  .paginate-buttons:hover {
+    @apply bg-gray-300;
+  }
+  
+  .active-page {
+    @apply bg-blue-500 border border-blue-500 text-white;
+  }
+  
+  .active-page:hover {
+    @apply bg-blue-600;
+  }
+  
