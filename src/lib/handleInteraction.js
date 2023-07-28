@@ -52,6 +52,8 @@ const initWebSocket = (
       const total_tokens = data.total_tokens
       const citations = data.citations
 
+      interactionState.follow_up_questions = data.follow_up_questions
+
       if (data.type === 'error')
         console.error('WebSocket received an error:', message)
       else if (message) {

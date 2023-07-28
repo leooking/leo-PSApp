@@ -9,6 +9,7 @@ import formatResponse from '../../lib/formatResponse'
 import CharacterCounter from '../../components/CharacterCounter.vue'
 import getCharacterLimit from '../../lib/getCharacterLimit'
 import Disclaimer from '../../components/Disclaimer.vue'
+import FollowUpBtn from '../../components/Buttons/FollowUpBtn.vue'
 import Button from 'primevue/button'
 import axios from 'axios'
 import {
@@ -32,7 +33,6 @@ const convo = ref(null)
 const interactionState = inject('interactionState')
 const agree = inject('agree')
 const setLoading = inject('setLoading')
-const response = inject('response')
 const setState = inject('setState')
 const fetchConvo = inject('fetchConvo')
 
@@ -70,14 +70,24 @@ const generate = () => {
   try {
     const reload = () => fetchConvo(interactionState.asset.pid)
     if (props.isAIChat)
-      execute(
-        interactionState,
-        setLoading,
-        toBottom,
-        {},
-        reload,
-        'chat/winmore'
-      )
+      if (interactionState.useExternal)
+        execute(
+          interactionState,
+          setLoading,
+          toBottom,
+          {},
+          reload,
+          'chat/winmore' // 'text2sql'
+        )
+      else
+        execute(
+          interactionState,
+          setLoading,
+          toBottom,
+          {},
+          reload,
+          'chat/winmore'
+        )
     else execute(interactionState, setLoading, toBottom, {}, reload)
   } catch (err) {
     toast.error(err.message)
@@ -120,6 +130,11 @@ const agreeToBottom = () => {
 .responses ol {
   margin-bottom: 10px;
 }
+
+.gap {
+  gap: 10px;
+}
+
 </style>
 <template>
   <div
@@ -273,10 +288,13 @@ const agreeToBottom = () => {
         </div>
       </div>
       <form
-        class="flex flex-col w-full items-center py-2"
+        class="flex flex-col w-full items-center py-2 gap"
         @submit.stop.prevent="generate"
         v-if="interactionState?.agreed"
       >
+        <div v-if="interactionState.asset.interactions.length > 0" class="flex w-full px-0">
+          <FollowUpBtn/>
+        </div>
         <div class="flex w-full px-0">
           <CharacterCounter
             :content="interactionState.promptData.prompt"

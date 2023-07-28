@@ -168,6 +168,7 @@ const toggleSeason = (value, code) => {
           <Convo
             :classes="interactionState.agreed ? 'max-h-[65vh]' : 'max-h-[70vh]'"
             :hideDisclaimer="true"
+            :isAIChat="true"
           />
           <div class="flex pb-4" v-if="interactionState.agreed">
             <PromptLibraryBtn
